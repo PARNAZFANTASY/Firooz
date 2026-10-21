@@ -89,7 +89,7 @@
       content: '';
       position: absolute;
       inset: -10px;
-      background: url('wallpaper.jpg') center / cover no-repeat;
+      background: url('wallpaper.jpeg') center / cover no-repeat;
       filter: blur(3px);
       z-index: -2;
     }
@@ -251,7 +251,7 @@
       <button class="menu-btn" id="menuBtn" aria-label="باز کردن منو">
         <span></span><span></span><span></span>
       </button>
-      <a href="index.html"><img src="logo.jpg" alt="لوگوی فیروز"></a>
+      <a href="index.html"><img src="logo.jpeg" alt="لوگوی فیروز"></a>
     </div>
     <ul class="nav-links">
       <li><a href="cart.html">خرید</a></li>
