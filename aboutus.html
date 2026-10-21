@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>درباره ما | فیروز</title>
+  <style>
+    :root {
+      --purple: #b9a9e3;
+      --pink: #f6d8ef;
+      --white: #f8f8f6;
+      --mint: #b7eae1;
+      --dark: #3b2f63;
+      --main: #6b54b8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.9;
+    }
+    section { padding: 48px 20px; }
+    h2 { text-align: center; font-size: 1.6rem; margin-bottom: 28px; }
+
+    /* بالای صفحه */
+    .top {
+      background: linear-gradient(160deg, var(--purple), var(--pink) 50%, var(--mint));
+      text-align: center;
+      padding: 56px 20px 48px;
+    }
+    .top h1 { font-size: 2.4rem; margin-bottom: 8px; }
+    .top p { max-width: 520px; margin: 0 auto 20px; }
+    .back {
+      display: inline-block;
+      background: #fff;
+      color: var(--main);
+      text-decoration: none;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+    }
+    .back:hover { background: var(--main); color: #fff; }
+
+    /* مدیر توسعه */
+    .manager { background: var(--pink); }
+    .manager-card {
+      max-width: 420px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(107, 84, 184, 0.15);
+    }
+    .manager-card .photo {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 16px;
+      border: 4px solid var(--purple);
+      box-shadow: 0 4px 14px rgba(107, 84, 184, 0.25);
+    }
+    .manager-card h3 { font-size: 1.3rem; }
+    .role { color: var(--main); font-weight: bold; margin-bottom: 10px; }
+    .manager-card p { font-size: 0.95rem; color: #6d6490; }
+
+    /* عکس (دایره‌ای) */
+    .photo {
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: contrast(1.05) saturate(1.05);
+    }
+
+    /* همکاران: دوتا دوتا کنار هم */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .member {
+      background: #fff;
+      border-radius: 18px;
+      padding: 18px 14px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(107, 84, 184, 0.12);
+    }
+    .member .photo { width: 110px; height: 110px; margin: 0 auto 12px; }
+    .member:nth-child(4n+2) .photo { background: var(--pink); }
+    .member:nth-child(4n+3) .photo { background: var(--mint); }
+    .member:nth-child(4n+4) .photo { background: #e6dff7; }
+    .member h3 { font-size: 1.05rem; }
+    .member p { font-size: 0.88rem; color: #6d6490; }
+
+    footer { background: var(--purple); text-align: center; padding: 20px; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <!-- بالای صفحه -->
+  <header class="top">
+    <h1>درباره ما</h1>
+    <p>با تیم فیروز آشنا شوید؛ گروهی که با تلاش و دقت، محصولات بهداشتی و شوینده باکیفیت را به خانه‌های شما می‌رساند.</p>
+    <a class="back" href="index.html">← بازگشت به صفحه اصلی</a>
+  </header>
+
+  <!-- مدیر توسعه -->
+  <section class="manager">
+    <h2>مدیر توسعه شرکت</h2>
+    <div class="manager-card">
+      <div class="photo">
+        <img src="Employer.jpg" alt="مینا برزگری" onerror="this.style.display='none'">
+      </div>
+      <h3>مینا برزگری</h3>
+      <div class="role">مدیر توسعه شرکت فیروز</div>
+      <p>
+        مینا برزگری مسئول برنامه‌ریزی و توسعه شرکت فیروز است.
+        او با هدایت تیم و تمرکز بر کیفیت محصولات و رضایت مشتریان،
+        مسیر رشد و پیشرفت شرکت را دنبال می‌کند.
+      </p>
+    </div>
+  </section>
+
+  <!-- همکاران -->
+  <section>
+    <h2>همکاران ما</h2>
+    <div class="team-grid">
+      <div class="member">
+        <div class="photo"><img src="images/staff1.jpg" alt="زهرا احمدی" onerror="this.style.display='none'">👩</div>
+        <h3>زهرا احمدی</h3>
+        <p>مسئول کنترل کیفیت؛ بررسی دقیق محصولات پیش از ارسال به بازار.</p>
+      </div>
+      <div class="member">
+        <div class="photo"><img src="images/staff2.jpg" alt="رضا محمدی" onerror="this.style.display='none'">👨</div>
+        <h3>رضا محمدی</h3>
+        <p>مدیر تولید؛ نظارت بر خط تولید و رعایت استانداردهای بهداشتی.</p>
+      </div>
+      <div class="member">
+        <div class="photo"><img src="images/staff3.jpg" alt="نگار حسینی" onerror="this.style.display='none'">👩</div>
+        <h3>نگار حسینی</h3>
+        <p>مسئول فروش؛ ارتباط با فروشگاه‌ها و مشتریان عمده.</p>
+      </div>
+      <div class="member">
+        <div class="photo"><img src="images/staff4.jpg" alt="امیر کریمی" onerror="this.style.display='none'">👨</div>
+        <h3>امیر کریمی</h3>
+        <p>کارشناس پشتیبانی؛ پاسخگویی به سوالات و پیگیری سفارش‌ها.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>© فیروز — تمامی حقوق محفوظ است</footer>
+
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فیروز | محصولات شوینده و بهداشتی</title>
+  <style>
+    :root {
+      --purple: #b9a9e3;
+      --pink: #f6d8ef;
+      --white: #f8f8f6;
+      --mint: #b7eae1;
+      --dark: #3b2f63;
+      --main: #6b54b8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.9;
+    }
+    section { padding: 48px 16px; }
+    h2 { text-align: center; font-size: 1.6rem; margin-bottom: 28px; }
+
+    /* ===== دکمه (یک شکل برای همه) ===== */
+    .btn {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      background: var(--main);
+      color: #fff;
+      border: none;
+      padding: 10px 26px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(107, 84, 184, 0.3);
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { background: var(--dark); transform: translateY(-3px); box-shadow: 0 6px 14px rgba(59, 47, 99, 0.35); }
+    .btn:active { transform: scale(0.94); }
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      pointer-events: none;
+    }
+    @keyframes ripple { to { transform: scale(2.5); opacity: 0; } }
+
+    /* ===== نوار ناوبری ===== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .navbar img { height: 44px; display: block; }
+    .nav-links { display: flex; gap: 16px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--dark); font-size: 0.95rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--main); }
+
+    /* ===== هیرو (پس‌زمینه عکس) ===== */
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: var(--purple);
+    }
+    /* عکس با کمی محو شدن تا کیفیت پایین کمتر دیده بشه */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      background: url('wallpaper.jpg') center / cover no-repeat;
+      filter: blur(3px);
+      z-index: -2;
+    }
+    /* لایه رنگی روی عکس */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(185,169,227,0.78), rgba(246,216,239,0.72) 50%, rgba(183,234,225,0.78));
+      z-index: -1;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 8px; }
+    .hero p { max-width: 480px; margin-bottom: 28px; padding: 0 16px; }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+    /* ===== محصولات: دوتا دوتا ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 16px rgba(107, 84, 184, 0.12);
+    }
+    .product-card .pic {
+      height: 170px;
+      background: #fff;
+      border-bottom: 3px solid var(--pink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+    }
+    .product-card .pic img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .product-card .info { padding: 14px; display: flex; flex-direction: column; flex: 1; text-align: center; }
+    .product-card h3 { font-size: 1rem; line-height: 1.6; }
+    .product-card p { font-size: 0.85rem; color: #6d6490; margin: 6px 0 10px; flex: 1; }
+    .price { font-weight: bold; color: var(--main); margin-bottom: 10px; }
+    .product-card .btn { width: 100%; padding: 10px 8px; font-size: 0.88rem; }
+
+    /* ===== نظرات ===== */
+    .reviews { background: var(--mint); }
+    .review { background: #fff; border-radius: 16px; padding: 18px; max-width: 520px; margin: 0 auto 14px; }
+    .review strong { color: var(--main); }
+
+    footer { background: var(--purple); text-align: center; padding: 20px; font-size: 0.9rem; }
+
+    /* ===== دکمه همبرگری ===== */
+    .nav-start { display: flex; align-items: center; gap: 10px; }
+    .menu-btn {
+      width: 42px;
+      height: 42px;
+      background: none;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .menu-btn:hover { background: var(--pink); }
+    .menu-btn:active { transform: scale(0.9); }
+    .menu-btn span { display: block; width: 22px; height: 3px; background: var(--dark); border-radius: 3px; }
+
+    /* ===== صفحه منو (ورود به حساب) ===== */
+    .side-panel {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: linear-gradient(160deg, var(--purple), var(--pink) 50%, var(--mint));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      transform: translateX(100%);
+      visibility: hidden;
+      transition: transform 0.35s, visibility 0.35s;
+    }
+    .side-panel.open { transform: translateX(0); visibility: visible; }
+    .side-panel h2 { margin: 0; }
+    .panel-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--dark);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .panel-close:active { transform: scale(0.9); }
+
+    /* ===== دکمه ثابت سبد خرید ===== */
+    .cart-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 16px;
+      z-index: 60;
+      padding: 12px 22px;
+      font-size: 1rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .cart-fab:hover { animation-play-state: paused; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    .cart-count {
+      display: inline-block;
+      min-width: 24px;
+      height: 24px;
+      line-height: 24px;
+      margin-right: 6px;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--main);
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+    .cart-count.pop { animation: pop 0.4s; }
+    @keyframes pop { 50% { transform: scale(1.5); } }
+
+    /* ===== پیام Toast ===== */
+    #toast {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      background: var(--dark);
+      color: #fff;
+      padding: 12px 26px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 100;
+    }
+    #toast.show { opacity: 1; transform: translate(-50%, 0); }
+  </style>
+</head>
+<body>
+
+  <!-- نوار ناوبری -->
+  <nav class="navbar">
+    <div class="nav-start">
+      <button class="menu-btn" id="menuBtn" aria-label="باز کردن منو">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.html"><img src="logo.jpg" alt="لوگوی فیروز"></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="cart.html">خرید</a></li>
+      <li><a href="aboutus.html">درباره ما</a></li>
+      <li><a href="#reviews">نظرات</a></li>
+      <li><a href="#products">محصولات</a></li>
+    </ul>
+  </nav>
+
+  <!-- هیرو -->
+  <header class="hero">
+    <h1>فیروز</h1>
+    <p>محصولات شوینده و بهداشتی با کیفیت برای مراقبت از کودکان و خانه‌ای پاک و خوشبو</p>
+    <div class="hero-buttons">
+      <a class="btn" href="aboutus.html">درباره ما</a>
+      <a class="btn" href="contactus.html">ارتباط با ما</a>
+      <a class="btn" href="#reviews">نظرات</a>
+    </div>
+  </header>
+
+  <!-- محصولات -->
+  <section id="products">
+    <h2>محصولات ما</h2>
+    <div class="grid">
+
+      <div class="product-card">
+        <div class="pic"><img src="images/cream.jpg" alt="کرم مرطوب‌کننده"></div>
+        <div class="info">
+          <h3>کرم مرطوب‌کننده صورت و بدن</h3>
+          <p>حاوی دانه‌های رنگی، ویتامین E و دی‌پانتنول. مخصوص پوست حساس نوزادان و کودکان. ۷۵ گرم</p>
+          <div class="price">۶۵,۰۰۰ تومان</div>
+          <button class="btn add-btn">افزودن به سبد خرید</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="pic"><img src="images/baby-shampoo.jpg" alt="شامپو بچه"></div>
+        <div class="info">
+          <h3>شامپو بچه</h3>
+          <p>حاوی ویتامین E و B5، بدون سوزش چشم (Tears Free). ۳۰۰ میلی‌لیتر</p>
+          <div class="price">۵۵,۰۰۰ تومان</div>
+          <button class="btn add-btn">افزودن به سبد خرید</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="pic"><img src="images/detangler-spray.jpg" alt="اسپری نرم‌کننده مو"></div>
+        <div class="info">
+          <h3>اسپری نرم‌کننده مو</h3>
+          <p>باز‌کننده گره موی کودک، بهبود شانه‌پذیری و آنتی‌استاتیک. ۳۰۰ میلی‌لیتر</p>
+          <div class="price">۶۰,۰۰۰ تومان</div>
+          <button class="btn add-btn">افزودن به سبد خرید</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="pic"><img src="images/laundry-liquid.jpg" alt="مایع لباسشویی کودک"></div>
+        <div class="info">
+          <h3>مایع لباسشویی کودک</h3>
+          <p>ملایم و ضدحساسیت، فاقد ۱۰۰٪ رنگ‌زا و مورد اعتماد مادران. ۲۰۰۰ گرم</p>
+          <div class="price">۱۸۵,۰۰۰ تومان</div>
+          <button class="btn add-btn">افزودن به سبد خرید</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="pic"><img src="images/soap-powder.jpg" alt="پودر صابون"></div>
+        <div class="info">
+          <h3>پودر صابون بیبی</h3>
+          <p>پاک‌کننده و نرم‌کننده قوی البسه با کف مناسب و کنترل‌شده، مخصوص ماشین‌های اتوماتیک و نیمه‌اتوماتیک. ۴۰۰ گرم</p>
+          <div class="price">۷۵,۰۰۰ تومان</div>
+          <button class="btn add-btn">افزودن به سبد خرید</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="pic"><img src="images/foam-handwash.jpg" alt="مایع دستشویی فوم"></div>
+        <div class="info">
+          <h3>مایع دستشویی فوم</h3>
+          <p>فوم نرم و ملایم برای شستشوی آسان دست کودکان. ۳۰۰ گرم</p>
+          <div class="price">۷۰,۰۰۰ تومان</div>
+          <button class="btn add-btn">افزودن به سبد خرید</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- نظرات -->
+  <section class="reviews" id="reviews">
+    <h2>نظرات مشتریان</h2>
+    <div class="review"><strong>سارا</strong><p>شامپو بچه‌شون چشم بچه رو نمی‌سوزونه و بوی خوبی داره.</p></div>
+    <div class="review"><strong>علی</strong><p>مایع لباسشویی کودک خیلی ملایمه و پوست دخترم حساس نشد.</p></div>
+    <div class="review"><strong>مریم</strong><p>اسپری مو کار شانه کردن رو برای بچه‌ام خیلی راحت کرده.</p></div>
+  </section>
+
+  <footer>© فیروز — تمامی حقوق محفوظ است</footer>
+
+  <!-- صفحه منو -->
+  <div class="side-panel" id="sidePanel">
+    <button class="panel-close" id="closeBtn" aria-label="بستن">✕</button>
+    <h2>حساب کاربری</h2>
+    <a class="btn" href="profile.html">ورود به حساب</a>
+  </div>
+
+  <!-- دکمه ثابت سبد خرید -->
+  <button class="btn cart-fab" id="cartBtn">🛒 سبد خرید <span class="cart-count" id="cartCount">۰</span></button>
+
+  <!-- پیام Toast -->
+  <div id="toast" role="status">به سبد خرید افزوده شد</div>
+
+  <script>
+    // افکت موج هنگام کلیک روی همه دکمه‌ها
+    document.querySelectorAll('.btn').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        var rect = btn.getBoundingClientRect();
+        var size = Math.max(rect.width, rect.height);
+        var wave = document.createElement('span');
+        wave.className = 'ripple';
+        wave.style.width = wave.style.height = size + 'px';
+        wave.style.left = (e.clientX - rect.left - size / 2) + 'px';
+        wave.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        btn.appendChild(wave);
+        setTimeout(function () { wave.remove(); }, 600);
+      });
+    });
+
+    // پیام Toast
+    var toast = document.getElementById('toast');
+    var timer;
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(function () { toast.classList.remove('show'); }, 2000);
+    }
+
+    // سبد خرید (ذخیره در localStorage تا در صفحه‌های دیگر هم باشه)
+    var countBox = document.getElementById('cartBtn').querySelector('.cart-count');
+    function faNum(n) { return n.toLocaleString('fa-IR'); }
+    function loadCart() {
+      try { return JSON.parse(localStorage.getItem('firoozCart')) || []; } catch (e) { return []; }
+    }
+    function saveCart(c) {
+      try { localStorage.setItem('firoozCart', JSON.stringify(c)); } catch (e) {}
+    }
+    function totalQty(c) { return c.reduce(function (sum, item) { return sum + item.qty; }, 0); }
+    function priceToNumber(text) {
+      var latin = text.replace(/[۰-۹]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); });
+      return parseInt(latin.replace(/\D/g, ''), 10);
+    }
+
+    var cart = loadCart();
+    countBox.textContent = faNum(totalQty(cart));
+
+    // وقتی با دکمه برگشت به این صفحه میای، شمارنده به‌روز بشه
+    window.addEventListener('pageshow', function () {
+      cart = loadCart();
+      countBox.textContent = faNum(totalQty(cart));
+    });
+
+    document.querySelectorAll('.add-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var card = btn.closest('.product-card');
+        var name = card.querySelector('h3').textContent;
+        var found = cart.find(function (item) { return item.name === name; });
+        if (found) {
+          found.qty++;
+        } else {
+          cart.push({
+            name: name,
+            price: priceToNumber(card.querySelector('.price').textContent),
+            img: card.querySelector('img').getAttribute('src'),
+            qty: 1
+          });
+        }
+        saveCart(cart);
+        countBox.textContent = faNum(totalQty(cart));
+        countBox.classList.remove('pop');
+        void countBox.offsetWidth;
+        countBox.classList.add('pop');
+        showToast('به سبد خرید افزوده شد');
+      });
+    });
+
+    // کلیک روی دکمه سبد خرید: رفتن به صفحه خرید
+    document.getElementById('cartBtn').addEventListener('click', function () {
+      setTimeout(function () { window.location.href = 'cart.html'; }, 250);
+    });
+
+    // منوی همبرگری
+    var panel = document.getElementById('sidePanel');
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      panel.classList.add('open');
+    });
+    document.getElementById('closeBtn').addEventListener('click', function () {
+      panel.classList.remove('open');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') panel.classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>
